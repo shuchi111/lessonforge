@@ -1,0 +1,63 @@
+# Technical terms a zero-background learner will not know.
+# Check J1: if the lesson body uses any of these, the glossary must list it.
+# Patterns are regular expressions. Acronyms are case-sensitive so "rag" in normal
+# words never matches.
+terms:
+  - term: AI
+    patterns: ['\bAI\b', 'artificial intelligence']
+    case_sensitive: true
+  - term: LLM
+    patterns: ['\bLLMs?\b', '[Ll]arge [Ll]anguage [Mm]odels?']
+    case_sensitive: true
+  - term: RAG
+    patterns: ['\bRAG\b', '[Rr]etrieval[- ][Aa]ugmented [Gg]eneration']
+    case_sensitive: true
+  - term: prompt
+    patterns: ['\bprompts?\b']
+  - term: retrieval
+    patterns: ['\bretriev(al|e|es|ed|ing|er)\b']
+  - term: chunk
+    patterns: ['\bchunks?\b', '\bchunking\b']
+  - term: embedding
+    patterns: ['\bembeddings?\b']
+  - term: vector
+    patterns: ['\bvectors?\b']
+  - term: vector database
+    patterns: ['\bvector (database|store|index|DB)s?\b']
+  - term: similarity search
+    patterns: ['\bsimilarity search\b', '\bsemantic search\b']
+  - term: hallucination
+    patterns: ['\bhallucinat(e|es|ed|ing|ion|ions)\b']
+  - term: knowledge cutoff
+    patterns: ['\b(knowledge|training) cut-?off\b']
+  - term: context window
+    patterns: ['\bcontext window\b']
+  - term: fine-tuning
+    patterns: ['\bfine[- ]?tun(e|ed|ing)\b']
+  - term: model weights
+    patterns: ['\bweights\b', '\bparameters\b']
+  - term: training data
+    patterns: ['\btraining data\b']
+  - term: token
+    patterns: ['\btokens?\b']
+  - term: embedding model
+    patterns: ['\bembedding models?\b']
+  - term: cosine similarity
+    patterns: ['\bcosine similarity\b']
+  - term: nearest neighbour
+    patterns: ['\bnearest[- ]neighbou?rs?\b']
+  - term: HNSW
+    patterns: ['\bHNSW\b']
+    case_sensitive: true
+  - term: BM25
+    patterns: ['\bBM25\b']
+    case_sensitive: true
+  - term: API
+    patterns: ['\bAPIs?\b']
+    case_sensitive: true
+  - term: top-k
+    patterns: ['\btop[- ]k\b']
+  - term: dense retrieval
+    patterns: ['\bdense (retrieval|vectors?|embeddings?)\b']
+  - term: index
+    patterns: ['\bindex(ing|ed)?\b']
