@@ -1,0 +1,40 @@
+title: "Introduction to RAG (Retrieval-Augmented Generation)"
+short_name: "RAG"
+aliases:
+  - rag
+  - retrieval-augmented generation
+  - retrieval augmented generation
+  - introduction to rag
+
+# What a beginner must understand by the end. The pedagogy judge checks every one (C1).
+key_points:
+  - id: KP1
+    text: "LLMs have limits: their knowledge stops at a training cutoff date, they do not know private or very recent information, and they can confidently make things up (hallucinate)."
+  - id: KP2
+    text: "Definition: RAG means first finding (retrieving) relevant information from a trusted source, then giving it to the LLM together with the question, so it can write (generate) a better answer. Explain what R, A and G stand for."
+  - id: KP3
+    text: "Preparation step (indexing): documents are split into small pieces called chunks, each chunk is turned into an embedding (a list of numbers that captures meaning), and these are stored in a vector database."
+  - id: KP4
+    text: "Retrieval step: the user's question is also turned into an embedding, and the system finds the chunks whose meaning is most similar to the question (similarity search)."
+  - id: KP5
+    text: "Augmentation step: the retrieved chunks and the question are put together into one prompt for the LLM."
+  - id: KP6
+    text: "Generation step: the LLM writes the answer using the retrieved information, and can point to the sources it used."
+  - id: KP7
+    text: "Why it matters: answers can use up-to-date and private information, hallucinations are reduced, sources can be checked, and no retraining of the model is needed."
+  - id: KP8
+    text: "RAG does not change or retrain the model. To update what the system knows, you update the documents."
+  - id: KP9
+    text: "Limits of RAG: the answer is only as good as the retrieved chunks; if retrieval finds the wrong information, the answer can still be wrong."
+  - id: KP10
+    text: "Real-world uses, e.g. customer-support chatbots answering from company manuals, or 'chat with your PDF' tools."
+
+# The accuracy judge fails the lesson if it states or implies any of these (A2).
+misconceptions:
+  - "RAG retrains or fine-tunes the model, or changes the model's weights/parameters."
+  - "With RAG, new knowledge is stored permanently inside the model."
+  - "RAG completely removes hallucinations or guarantees correct answers."
+  - "RAG always means searching the whole internet (it searches whatever knowledge source you connect, often your own documents)."
+  - "The LLM reads every document in the library for each question (it only receives the few most relevant chunks)."
+  - "Embeddings are the same as keyword matching (embeddings capture meaning, so different words with the same meaning can match)."
+  - "The LLM itself searches the database (a separate retriever does the search; the LLM only reads what it is given)."
