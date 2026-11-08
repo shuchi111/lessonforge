@@ -1,0 +1,153 @@
+# LessonForge rubric: hard pass/fail checkpoints. No partial credit.
+#
+# method: code -> deterministic Python check (repeatable, free, can't be talked into passing)
+# method: llm  -> LLM judge; checks are grouped into a few judge calls to save tokens,
+#                 but every check gets its own verdict + evidence quote + fix.
+# severity: critical failures are weighted first when picking the "best" failed attempt.
+
+checks:
+  # ---------- Coherent teaching flow / structure ----------
+  - id: S1
+    name: Required sections in teaching order
+    dimension: coherent flow
+    method: code
+    severity: critical
+  - id: S2
+    name: Standalone length
+    dimension: covers key points
+    method: code
+    severity: major
+    params: {min_words: 800, max_words: 1800}
+
+  # ---------- Beginner-friendly language ----------
+  - id: L1
+    name: Reading level at or below grade 8
+    dimension: beginner-friendly language
+    method: code
+    severity: major
+    params: {max_grade: 8.0}
+  - id: L2
+    name: Short sentences
+    dimension: beginner-friendly language
+    method: code
+    severity: major
+    params: {max_avg_words: 18, max_sentence_words: 30}
+
+  # ---------- Clear, no unexplained jargon ----------
+  - id: J1
+    name: Every technical term used is in the glossary
+    dimension: no unexplained jargon
+    method: code
+    severity: major
+  - id: G1
+    name: Glossary entries have a Hindi meaning
+    dimension: beginner-friendly language
+    method: code
+    severity: major
+    params: {min_entries: 5}
+  - id: Q1
+    name: Quiz has at least 3 questions and an answer key
+    dimension: coherent flow
+    method: code
+    severity: major
+    params: {min_questions: 3}
+
+  # ---------- Accurate & grounded (judge: accuracy) ----------
+  - id: A1
+    name: Factually accurate and grounded
+    dimension: accurate & grounded
+    method: llm
+    judge: accuracy
+    severity: critical
+    criterion: >-
+      Every factual claim about the topic is consistent with the FACT SHEET. Claims not
+      covered by the fact sheet must be basic, widely accepted facts. FAIL if any claim
+      contradicts the fact sheet, or if the lesson invents facts (fake statistics, fake
+      dates or history, made-up tools or products).
+  - id: A2
+    name: No misconceptions
+    dimension: accurate & grounded
+    method: llm
+    judge: accuracy
+    severity: critical
+    criterion: >-
+      The lesson does not state or imply ANY item in the MISCONCEPTIONS list, including
+      through an analogy (for example, saying the AI "learns" or "remembers" the documents
+      permanently). FAIL if even one misconception is present.
+
+  # ---------- Language & jargon (judge: language) ----------
+  - id: J2
+    name: Jargon explained in simple words at first use
+    dimension: no unexplained jargon
+    method: llm
+    judge: language
+    severity: critical
+    criterion: >-
+      Every technical term is explained in simple words in the lesson body the FIRST time
+      it appears (a glossary entry alone is not enough). FAIL if any technical term is used
+      before it is explained, or is never explained in the body.
+  - id: L3
+    name: Simple, friendly English for a non-native reader
+    dimension: beginner-friendly language
+    method: llm
+    judge: language
+    severity: major
+    criterion: >-
+      Uses common everyday English words that a learner with limited English vocabulary
+      knows, and talks directly to the learner ("you"). FAIL if the lesson contains any
+      unexplained difficult word (e.g. "leverage", "paradigm", "robust", "facilitate"),
+      idiom or slang (e.g. "piece of cake", "game changer"), or a culture-specific
+      reference an Indian 12th-grade student may not know (e.g. baseball, Thanksgiving).
+
+  # ---------- Pedagogy (judge: pedagogy) ----------
+  - id: C1
+    name: Covers all key points
+    dimension: covers key points
+    method: llm
+    judge: pedagogy
+    severity: critical
+    criterion: >-
+      Every item in the KEY POINTS list is clearly taught in the lesson. FAIL if any key
+      point is missing or only mentioned without explanation. In the reason, list the IDs
+      of missing key points.
+  - id: E1
+    name: Teaches by example
+    dimension: teaches by example
+    method: llm
+    judge: pedagogy
+    severity: major
+    criterion: >-
+      The lesson has (a) at least one everyday analogy, AND (b) one complete worked
+      example that walks through EVERY step of how the topic works using concrete,
+      specific data (for RAG: an actual question, the actual chunks found, what the final
+      prompt looks like, and the final answer). FAIL if either part is missing or vague.
+  - id: E2
+    name: Examples relatable to an Indian learner
+    dimension: teaches by example
+    method: llm
+    judge: pedagogy
+    severity: major
+    criterion: >-
+      Analogies and examples use situations familiar to a young Indian learner (school,
+      board exams, cricket, trains, local shops, mobile phones, family). FAIL if the main
+      examples rely on settings unfamiliar to them.
+  - id: F1
+    name: Coherent, standalone teaching flow
+    dimension: coherent flow
+    method: llm
+    judge: pedagogy
+    severity: major
+    criterion: >-
+      The lesson moves from what -> why -> how -> example, and each section builds on the
+      previous one. No concept is used before it is introduced. It is standalone: no
+      "as discussed earlier", no assumed prior knowledge, no references to other lessons.
+  - id: Q2
+    name: Quiz is correct and answerable from the lesson
+    dimension: coherent flow
+    method: llm
+    judge: pedagogy
+    severity: major
+    criterion: >-
+      Every quiz question can be answered using only the lesson, has exactly one correct
+      option, and the answer key is correct. FAIL if any question or answer is wrong,
+      ambiguous, or not covered by the lesson.
